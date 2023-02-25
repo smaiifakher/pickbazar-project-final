@@ -1,0 +1,66 @@
+version: '3.5'
+
+services:
+
+  laravel:
+    image: ${COMPOSE_PROJECT_NAME}-laravel:latest
+    build:
+      context: ./api
+      args:
+        BUILD_ARGUMENT_ENV: dev
+        HOST_UID: ${HOST_UID}
+        HOST_GID: ${HOST_GID}
+        XDEBUG_CONFIG: ${XDEBUG_CONFIG}
+      dockerfile: Dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME}-laravel
+    ports:
+      - "${WEB_PORT_HTTP}:80"
+      - "${WEB_PORT_SSL}:443"
+    volumes:
+      - ./api:/var/www/html:cached
+    depends_on:
+      - mysql
+    networks:
+      - laravel
+
+  mysql:
+    image: mysql:8.0
+    platform: linux/x86_64
+    container_name: ${COMPOSE_PROJECT_NAME}-mysql
+    command: --default-authentication-plugin=mysql_native_password --innodb-use-native-aio=${INNODB_USE_NATIVE_AIO:-1}
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: laravel
+    ports:
+      - "33061:3306"
+    volumes:
+      - laravel_mysql:/var/lib/mysql
+      - ./docker/dev/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - laravel
+  redis:
+    image: redis:alpine
+    container_name: ${COMPOSE_PROJECT_NAME}-redis
+    ports:
+      - ${FORWARD_REDIS_PORT:-6379}:6379
+    volumes:
+      - laravel_redis:/data
+    networks:
+      - laravel
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - laravel
+networks:
+  laravel:
+    name: laravel
+    driver: bridge
+volumes:
+  laravel_mysql:
+    driver: local
+  laravel_redis:
+    driver: local
