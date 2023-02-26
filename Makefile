@@ -160,4 +160,8 @@ migrate: ## Runs all migrations for main/test databases
 	@make exec cmd="php artisan marvel:install"
 
 
+storage-link: ## Runs all migrations for main/test databases
+	@make exec cmd="php artisan storage:link"
+
+
 

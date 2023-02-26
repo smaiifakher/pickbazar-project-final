@@ -4,9 +4,9 @@ echo "installing yarn"
 yarn
 
 echo "building project"
-yarn build
+yarn build:rest
 
 echo "starting project"
-yarn start
+yarn start:rest
 
 

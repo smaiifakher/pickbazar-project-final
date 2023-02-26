@@ -13,6 +13,8 @@ RUN yarn install
 # Copy the rest of the app files to the container
 COPY . .
 
+# Build the app with Next.js
+#RUN yarn build:rest
 
 # Expose port 3000
 EXPOSE 3002
