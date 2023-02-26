@@ -23,6 +23,38 @@ services:
     networks:
       - laravel
 
+  shop:
+    container_name: ${COMPOSE_PROJECT_NAME}-shop
+    build:
+      context: ./shop
+      dockerfile: Dockerfile
+    volumes:
+      - ./shop:/app/shop
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - laravel
+    networks:
+      - laravel
+  admin:
+    container_name: ${COMPOSE_PROJECT_NAME}-admin
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    volumes:
+      - ./admin:/app/admin
+    ports:
+      - "3002:3002"
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - laravel
+    networks:
+      - laravel
   mysql:
     image: mysql:8.0
     platform: linux/x86_64
