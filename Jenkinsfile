@@ -8,6 +8,12 @@ pipeline {
             }
         }
 
+        stage('Install Make') {
+            steps {
+                sh 'apt install make'
+            }
+        }
+
         stage('Prepare ENV') {
             steps {
                 sh 'make env-dev'
