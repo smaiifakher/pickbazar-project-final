@@ -10,7 +10,7 @@ pipeline {
 
         stage('Install Make') {
             steps {
-                sh 'apt install make'
+                sh 'make --version'
             }
         }
 
