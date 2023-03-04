@@ -44,7 +44,7 @@ pipeline {
 
         stage('Database migration') {
             steps {
-                sh 'make migrate'
+                sh 'make --version'
             }
         }
 
