@@ -44,19 +44,19 @@ pipeline {
 
         stage('Database migration') {
             steps {
-                sh 'make --version'
+                sh 'make migrate'
             }
         }
 
         stage('Link Storage') {
             steps {
-                sh 'make --version'
+                sh 'make storage:link'
             }
         }
 
         stage('Generate Key') {
             steps {
-                sh 'make --version'
+                sh 'make key:generate'
             }
         }
     }
