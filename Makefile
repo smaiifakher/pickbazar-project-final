@@ -157,7 +157,7 @@ drop-migrate: ## Drops databases and runs all migrations for the main/test datab
 
 
 migrate: ## Runs all migrations for main/test databases
-	@make exec cmd="php artisan marvel:install"
+	@make exec cmd="php artisan marvel:install --no-interaction"
 
 
 storage-link: ## Runs all migrations for main/test databases
