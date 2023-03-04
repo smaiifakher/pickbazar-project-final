@@ -50,13 +50,13 @@ pipeline {
 
         stage('Link Storage') {
             steps {
-                sh 'make storage-link'
+                sh 'make --version'
             }
         }
 
         stage('Generate Key') {
             steps {
-                sh 'make key-generate'
+                sh 'make --version'
             }
         }
     }
