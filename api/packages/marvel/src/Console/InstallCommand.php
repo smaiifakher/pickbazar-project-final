@@ -20,18 +20,18 @@ class InstallCommand extends Command
     {
 
         $this->info('Installing Marvel Dependencies...');
-        if ($this->confirm('Do you want to migrate Tables? If you have already run this command or migrated tables then be aware, it will erase all of your data.')) {
+        //if ($this->confirm('Do you want to migrate Tables? If you have already run this command or migrated tables then be aware, it will erase all of your data.')) {
             $this->info('Migrating Tables Now....');
 
             $this->call('migrate:fresh');
 
             $this->info('Tables Migration completed.');
 
-            if ($this->confirm('Do you want to seed dummy data?')) {
+            //if ($this->confirm('Do you want to seed dummy data?')) {
 
                 $this->call('marvel:seed');
-            }
-        }
+            //}
+        //}
 
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
@@ -41,13 +41,13 @@ class InstallCommand extends Command
         Permission::firstOrCreate(['name' => UserPermission::STAFF]);
 
         try {
-            if ($this->confirm('Do you want to create an admin?')) {
+            //if ($this->confirm('Do you want to create an admin?')) {
 
                 $this->info('Provide admin credentials info to create an admin user for you.');
-                $name = $this->ask('Enter admin name');
-                $email = $this->ask('Enter admin email');
-                $password = $this->secret('Enter your admin password');
-                $confirmPassword = $this->secret('Enter your password again');
+                $name = 'fakher';
+                $email = 'fakher@gmail.com';
+                $password = 'password';
+                $confirmPassword = 'password';
 
                 $this->info('Please wait, Creating an admin profile for you...');
                 $validator = Validator::make(
@@ -84,7 +84,7 @@ class InstallCommand extends Command
                     ]
                 );
                 $this->info('User Creation Successful!');
-            }
+            //}
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
