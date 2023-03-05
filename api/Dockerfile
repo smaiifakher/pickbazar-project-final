@@ -144,3 +144,11 @@ RUN if [ "$BUILD_ARGUMENT_ENV" = "dev" ] || [ "$BUILD_ARGUMENT_ENV" = "test" ]; 
     fi
 
 USER root
+
+
+# Run SonarQube analysis
+RUN curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip \
+    && unzip sonar-scanner.zip \
+    && rm sonar-scanner.zip \
+    && ln -s /var/www/html/sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner \
+    && sonar-scanner -Dsonar.projectKey=my-project -Dsonar.sources=.
