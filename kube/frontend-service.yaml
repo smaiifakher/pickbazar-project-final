@@ -1,0 +1,12 @@
+# Define a Service for the TypeScript frontend
+apiVersion: v1
+kind: Service
+metadata:
+  name: typescript-frontend-service
+spec:
+  selector:
+    app: typescript-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

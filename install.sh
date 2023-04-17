@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 FILE=.env
 if [ ! -f "$FILE" ]; then
   echo 'Creating .env file...'

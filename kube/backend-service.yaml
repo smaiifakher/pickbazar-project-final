@@ -1,0 +1,13 @@
+# Define a Service for the Laravel backend
+apiVersion: v1
+kind: Service
+metadata:
+  name: laravel-backend-service
+spec:
+  selector:
+    app: laravel-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
