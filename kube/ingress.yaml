@@ -1,21 +1,32 @@
-apiVersion: apps/v1
-kind: Deployment
+# ingress.yaml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: laravel-kubernetes-demo
+  name: my-app-ingress
 spec:
-  selector:
-    matchLabels:
-      run: laravel-kubernetes-demo
-  template:
-    metadata:
-      labels:
-        run: laravel-kubernetes-demo
-    spec:
-      containers:
-        - name: demo
-          image: learnk8s/laravel-kubernetes-demo
-          ports:
-            - containerPort: 80
-          env:
-            - name: APP_KEY
-              value: base64:cUPmwHx4LXa4Z25HhzFiWCf7TlQmSqnt98pnuiHmzgY=
+  rules:
+    - host: pickbazar.com # Replace with your desired domain name
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: shop-frontend-service
+                port:
+                  number: 80
+          - path: /admin
+            pathType: Prefix
+            backend:
+              service:
+                name: admin-frontend-service
+                port:
+                  number: 80

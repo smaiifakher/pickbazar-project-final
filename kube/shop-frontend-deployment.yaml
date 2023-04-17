@@ -1,0 +1,25 @@
+# Define a Deployment for the TypeScript frontend
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shop-frontend
+  template:
+    metadata:
+      labels:
+        app: shop-frontend
+    spec:
+      containers:
+        - name: shop-frontend
+          image: smaii/pickbazar-shop # Replace with your TypeScript frontend Docker image
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_API_BASE_URL
+              value: pickbazar.com/api # Replace with your Laravel backend API URL
+
+
