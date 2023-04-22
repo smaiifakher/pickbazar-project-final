@@ -30,4 +30,3 @@ spec:
               value: root # Replace with your database username
             - name: DB_PASSWORD
               value: secret # Replace with your database password
-

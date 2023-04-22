@@ -21,5 +21,3 @@ spec:
           env:
             - name: REACT_APP_API_BASE_URL
               value: pickbazar.com/api # Replace with your Laravel backend API URL
-
-

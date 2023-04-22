@@ -22,11 +22,6 @@ services:
       - mysql
     networks:
       - laravel
-  sonarqube:
-    image: sonarqube:latest
-    container_name: ${COMPOSE_PROJECT_NAME}-sonarqube
-    ports:
-      - "9000:9000"
   shop:
     container_name: ${COMPOSE_PROJECT_NAME}-shop
     build:
